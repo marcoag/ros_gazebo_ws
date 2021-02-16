@@ -29,3 +29,9 @@ Gazebo 11: http://gazebosim.org/tutorials?tut=install_ubuntu
 
 **Pre-installed virtual machine (recommended):** https://drive.google.com/file/d/1gT7C0TBfkQi0dvYoDceRagPC7X-FIRt_/view?usp=sharing
 
+## Prerequisites:
+
+* You are somehow familiar with GNU/Linux based environments and the bash terminal
+* You have basic knowledge of Python  or some other form of object oriented programing langugage
+* You have a computer with the required software installed or the provided virtual machine running
+
