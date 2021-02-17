@@ -300,8 +300,178 @@ ros2 launch
 
 ## 5. Develeloping with ROS
 
+When working with ROS we use workspaces. A workspace is a directory containing ROS 2 packages. Before using ROS 2, it’s necessary to source your ROS 2 installation workspace in the terminal you plan to work in. This makes ROS 2’s packages available for you to use in that terminal.
 
-If a certain software doesn't have a package or you want to use the source code versoin you would have to add it to your workspace and build it as we did with these packages.
+You also have the option of sourcing an “overlay” – a secondary workspace where you can add new packages without interfering with the existing ROS 2 workspace that you’re extending, or “underlay”. Your underlay must contain the dependencies of all the packages in your overlay. Packages in your overlay will override packages in the underlay. It’s also possible to have several layers of underlays and overlays, with each successive overlay using the packages of its parent underlays.
+
+If a certain ROS software doesn't have a binary package or you want to use the source code version you would have to add it to your workspace and build it as we will do with these packages.
+
+### 5.1 Get the workspace ready:
+
+In ROS2 it is usually a common practict to use `colcon` as the tool to build your packages.
+It is an iteration on the ROS build tools `catkin_make`, `catkin_make_isolated`, `catkin_tools` and `ament_tools`.
+You can install it from the oficial usual Ubuntu repositories:
+```
+sudo apt-get install python3-colcon-common-extensions
+```
+
+Let's create our workspace:
+```
+mkdir ~/ws/src
+cd ~/ws/src
+```
+
+In order to create a python package:
+```
+ros2 pkg create --build-type ament_python py_pubsub
+```
+
+### 5.2 Writing a publisher:
+
+Let's edit our publisher file:
+```
+cd py_pubsub/py_pubsub
+vim publisher_member_function.py
+```
+
+Add this to it:
+```
+import rclpy
+from rclpy.node import Node
+
+from std_msgs.msg import String
+
+
+class MinimalPublisher(Node):
+
+    def __init__(self):
+        super().__init__('minimal_publisher')
+        self.publisher_ = self.create_publisher(String, 'topic', 10)
+        timer_period = 0.5  # seconds
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.i = 0
+
+    def timer_callback(self):
+        msg = String()
+        msg.data = 'Hello World: %d' % self.i
+        self.publisher_.publish(msg)
+        self.get_logger().info('Publishing: "%s"' % msg.data)
+        self.i += 1
+
+
+def main(args=None):
+    rclpy.init(args=args)
+
+    minimal_publisher = MinimalPublisher()
+
+    rclpy.spin(minimal_publisher)
+
+    # Destroy the node explicitly
+    # (optional - otherwise it will be done automatically
+    # when the garbage collector destroys the node object)
+    minimal_publisher.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+```
+Add the dependencies to your `package.xml`:
+```
+<exec_depend>rclpy</exec_depend>
+<exec_depend>std_msgs</exec_depend>
+```
+
+Add the following line within the console_scripts brackets of the entry_points field of your `setup.py`:
+```
+entry_points={
+        'console_scripts': [
+                'talker = py_pubsub.publisher_member_function:main',
+        ],
+},
+```
+
+Now you can build your workspace:
+
+```
+cd ..
+colcon build 
+```
+
+Then you can source the workspace and run the publisher:
+
+```
+source install/setup.bash
+ros2 run py_pubsub talker
+```
+
+### 5.3 Writing a subscriber:
+
+Edit your subscriber file:
+```
+cd src/py_pubsub/py_pubsub/
+vim listener_member_function.py
+```
+
+Add this to the file:
+```
+import rclpy
+from rclpy.node import Node
+
+from std_msgs.msg import String
+
+
+class MinimalSubscriber(Node):
+
+    def __init__(self):
+        super().__init__('minimal_subscriber')
+        self.subscription = self.create_subscription(
+            String,
+            'topic',
+            self.listener_callback,
+            10)
+        self.subscription  # prevent unused variable warning
+
+    def listener_callback(self, msg):
+        self.get_logger().info('I heard: "%s"' % msg.data)
+
+
+def main(args=None):
+    rclpy.init(args=args)
+
+    minimal_subscriber = MinimalSubscriber()
+
+    rclpy.spin(minimal_subscriber)
+
+    # Destroy the node explicitly
+    # (optional - otherwise it will be done automatically
+    # when the garbage collector destroys the node object)
+    minimal_subscriber.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+Reopen `setup.py` and add the entry point for the subscriber node below the publisher’s entry point. The entry_points field should now look like this:
+
+```
+entry_points={
+        'console_scripts': [
+                'talker = py_pubsub.publisher_member_function:main',
+                'listener = py_pubsub.subscriber_member_function:main',
+        ],
+},
+```
+
+Now we can build again and run our subscriber too:
+
+```
+cd ~/ws/
+colcon build
+ros2 run py_pubsub talker
+```
 
 ## 6. ROS resources and community
 
