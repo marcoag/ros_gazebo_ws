@@ -41,7 +41,7 @@ Gazebo 11: http://gazebosim.org/tutorials?tut=install_ubuntu
 
 ## 1. ROS Overview
 
-You can find the this overview [here](https://docs.google.com/presentation/d/1MWuh-OQoFF2c5AxdfburZOnkCEHG8cknO582183rrLE/edit?usp=sharing)(slides 1-13).
+You can find the this overview [here](https://docs.google.com/presentation/d/1MWuh-OQoFF2c5AxdfburZOnkCEHG8cknO582183rrLE/edit?usp=sharing) (slides 1-13).
 
 ## 2. Quick review of the install steps
 
@@ -98,7 +98,7 @@ ros2 run turtlesim turtlesim_node
 ros2 run turtlesim turtle_teleop_key
 ````
 
-### 4.1 Publish and suscribe
+### 4.1 Publish and subscribe
 
 Let's have a look at what's going on. For this you can run:
 ```
@@ -182,7 +182,7 @@ We can also check the type of each service:
 ros2 service list -t
 ```
 
-Or wich services use a certain srv interface:
+Or which services use a certain srv interface:
 ```
 ros2 service find std_srvs/srv/Empty
 ```
@@ -308,7 +308,7 @@ If a certain ROS software doesn't have a binary package or you want to use the s
 
 ### 5.1 Get the workspace ready:
 
-In ROS2 it is usually a common practict to use `colcon` as the tool to build your packages.
+In ROS2 it is usually a common practice to use `colcon` as the tool to build your packages.
 It is an iteration on the ROS build tools `catkin_make`, `catkin_make_isolated`, `catkin_tools` and `ament_tools`.
 You can install it from the oficial usual Ubuntu repositories:
 ```
@@ -482,7 +482,7 @@ ros2 run py_pubsub talker
 
 ## 7. Gazebo Overview
 
-You can find the this overview [here](https://docs.google.com/presentation/d/1MWuh-OQoFF2c5AxdfburZOnkCEHG8cknO582183rrLE/edit?usp=sharing)(slides 14-19).
+You can find the this overview [here](https://docs.google.com/presentation/d/1MWuh-OQoFF2c5AxdfburZOnkCEHG8cknO582183rrLE/edit?usp=sharing) (slides 14-19).
 
 ## 8. Quick Review of install steps
 
@@ -578,7 +578,7 @@ gazebo walk.world
 The actor in the example above is really simple, all it loads is a COLLADA file described within the <skin> tag.
 The animation tag goes alongside the skin tag, and it takes a name parameter.
 
-You can also try with the `moonwalk.dae`annimation.
+You can also try with the `moonwalk.dae` animation.
 
 For example, the files walk.dae and moonwalk.dae are compatible so they can be mixed with each other:
 
