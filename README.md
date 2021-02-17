@@ -298,6 +298,11 @@ Launch several nodes with some specific configs:
 ros2 launch
 ```
 
+A parameter is a configuration value of a node. You can think of parameters as node settings. A node can store parameters as integers, floats, booleans, strings and lists. In ROS 2, each node maintains its own parameters. All parameters are dynamically reconfigurable, and built off of ROS 2 services. For more on this check the [ROS 2 paramaters tutorial](https://index.ros.org/doc/ros2/Tutorials/Parameters/Understanding-ROS2-Parameters/).
+```
+ros2 param list
+````
+
 ## 5. Develeloping with ROS
 
 When working with ROS we use workspaces. A workspace is a directory containing ROS 2 packages. Before using ROS 2, it’s necessary to source your ROS 2 installation workspace in the terminal you plan to work in. This makes ROS 2’s packages available for you to use in that terminal.
