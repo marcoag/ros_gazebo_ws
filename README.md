@@ -465,7 +465,7 @@ Reopen `setup.py` and add the entry point for the subscriber node below the publ
 entry_points={
         'console_scripts': [
                 'talker = py_pubsub.publisher_member_function:main',
-                'listener = py_pubsub.subscriber_member_function:main',
+                'listener = py_pubsub.listener_member_function:main',
         ],
 },
 ```
@@ -475,6 +475,7 @@ Now we can build again and run our subscriber too:
 ```
 cd ~/ws/
 colcon build
+source  install/setup.bash 
 ros2 run py_pubsub talker
 ```
 
