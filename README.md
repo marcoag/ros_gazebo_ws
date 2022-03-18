@@ -126,7 +126,7 @@ To check the info of a topic:
 ```
 ros2 topic info /turtle1/cmd_vel
 Type: geometry_msgs/msg/Twist
-Publisher count: 1
+Publisher count: 0
 Subscriber count: 2
 ```
 
@@ -234,10 +234,8 @@ A summary of the information related to an action:
 ros2 action info /turtle1/rotate_absolute
 
 Action: /turtle1/rotate_absolute
-Action clients: 1
-    /teleop_turtle
-Action servers: 1
-    /turtlesim
+Action clients: 0
+Action servers: 0ros2 
 ```
 
 Description of the action interface:
