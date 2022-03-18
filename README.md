@@ -320,7 +320,7 @@ sudo apt-get install python3-colcon-common-extensions
 
 Let's create our workspace:
 ```
-mkdir ~/ws/src
+mkdir -p ~/ws/src
 cd ~/ws/src
 ```
 
