@@ -1,47 +1,49 @@
+# Workshop run at:
+
+- 15-04-2023: [ROS Meetup Singapore](https://www.meetup.com/singapore-ros-meetup/events/292489542/) as part of the [FOSSAsia Summit](https://eventyay.com/e/7cfe0771) [robotics track](https://eventyay.com/e/7cfe0771/schedule?track=Robotics%3A). Branch: https://github.com/marcoag/ros_gazebo_ws/tree/main
+- 17-02-2022: [Computer Science Seminars](https://cs.aston.ac.uk/seminars/) at [Aston University](https://www.aston.ac.uk). Branch: https://github.com/marcoag/ros_gazebo_ws/tree/aston_university
+
 # Workshop: Introduction to ROS and Gazebo
 
-This workshop has been initially designed for the [Computer Science Seminars](https://cs.aston.ac.uk/seminars/) at [Aston University](https://www.aston.ac.uk). 
 It introduces some basics on how to use [ROS](https://www.ros.org) and [Gazebo](http://gazebosim.org) for robotics research and development.
 This is intended to serve as a guide to follow up along with the online presentation of the workshop.
 Alternatively you could try to follow these steps on your own and play around for some self learning. 
-The content of this workshop is based on the [ROS tutorials](https://index.ros.org/doc/ros2/Tutorials/) as well as the [Gazebo tutorials](http://gazebosim.org/tutorials).
-It is heavily recommended to check them out in order to expand the knowledge on the tools beyond what is covered here.
+The content of this workshop is havily based on the [ROS tutorials](https://index.ros.org/doc/ros2/Tutorials/) as well as the [Gazebo tutorials](http://gazebosim.org/tutorials).
+It is recommended to check these official resources out in order to expand the knowledge on the tools beyond what is covered here.
 
-If you run into problems or have any questions you could visit [ROS answers](https://answers.ros.org) or [Gazebo answers](https://answers.gazebosim.org) at any time to find a fast and optimal answer.
+If you run into problems or have any questions you could visit [ROS answers](https://answers.ros.org) or [Gazebo answers](https://answers.gazebosim.org) at any time to find an answer from the community. Please look for previous questions and verify your issue is not already answered before posting yours.
 
 ## How to use this workshop repo:
 
 The recommended way to follow this workshop is to **fork this repo**. That way you can add your notes to this file and commit your own files for later reviews.
 
+Feel free to send Pull Requests with fixes and improvements!
+
+Give a star, follow, like or whatever applies if you find this interesting.
+
 ## Abstract:
 
-ROS is a collection of tools, libraries, and conventions that aim to simplify the task of creating complex and robust robot behaviour across a wide variety of robotic platforms. Gazebo is a robotics simulator that allows to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments. In this workshop, Dr Gutierrez will guide you through a step by step practical session on how to develop robotics software with ROS and how Gazebo can help you test your robotics software so it is ready for the real world once you move it to a real robot.
+ROS is a collection of tools, libraries, and conventions that aim to simplify the task of creating complex and robust robot behaviour across a wide variety of robotic platforms. Gazebo is a robotics simulator that allows to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments. In this workshop, we will guide you through a step by step practical session on how to develop robotics software with ROS and how Gazebo can help you test your robotics software so it is ready for the real world once you move it to a real robot.
 
 Given that this is a hands-on seminar, attendants are advised where possible to install ROS2 and Gazebo prior to attending the seminar.
 
-Preferably: Ubuntu (20.04) + ROS Foxy (ros-foxy-desktop) + Gazebo 11
+Preferably: Ubuntu (22.04) + ROS Humble (ros-humble-desktop) + Gazebo Garden
 
-ROS Foxy (desktop package): https://index.ros.org/doc/ros2/Installation/Foxy/Linux-Install-Debians/
+ROS 2 Humble (desktop package): https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
-Gazebo 11: http://gazebosim.org/tutorials?tut=install_ubuntu
-
-Alternatively: Ubuntu (18.04/20.04) + ROS Dashing (ros-dashing-desktop) + Gazebo 11
-
-ROS Dashing (desktop pacakge): https://index.ros.org/doc/ros2/Installation/Dashing/Linux-Install-Debians/
-
-Gazebo 11: http://gazebosim.org/tutorials?tut=install_ubuntu 
+Gazebo Garden: https://gazebosim.org/docs/garden/install_ubuntu
 
 **Pre-installed virtual machine (recommended):** https://drive.google.com/file/d/1gT7C0TBfkQi0dvYoDceRagPC7X-FIRt_/view?usp=sharing
 
 ## Prerequisites:
 
-* You are somehow familiar with GNU/Linux based environments and the bash terminal
-* You have basic knowledge of Python  or some other form of object oriented programing langugage
-* You have a computer with the required software installed or the provided virtual machine running
+* You are somehow familiar with GNU/Linux based environments and the bash terminal.
+* You have basic knowledge of Python or some other form of object oriented programing langugage.
+* You have a computer with the required software installed or the provided virtual machine running.
 
 ## 1. ROS Overview
 
-You can find the this overview [here](https://docs.google.com/presentation/d/1MWuh-OQoFF2c5AxdfburZOnkCEHG8cknO582183rrLE/edit?usp=sharing) (slides 1-13).
+You can find the this overview [here](https://docs.google.com/presentation/d/1lqLCteaQou5E9WmedOlYZsTQ5_XGaaEVayGw0RX8LxE/edit?usp=sharing) (slides 1-16).
 
 ## 2. Quick review of the install steps
 
@@ -50,13 +52,13 @@ The ROS install instructions can be found [here](https://index.ros.org/doc/ros2/
 For the purpose of this workshop please follow the Desktop Install (ROS, RViz, demos, tutorials):
 
 ```
-sudo apt install ros-foxy-desktop
+sudo apt install ros-humble-desktop
 ```
 
 Once installed set up your environment by sourcing the file:
 
 ```
-source /opt/ros/foxy/setup.bash
+source /opt/ros/humble/setup.bash
 ```
 
 You can make this automated for every bash you open with:
@@ -70,7 +72,7 @@ You can now check the version of your ROS distribution:
 $ env|grep ROS
 ROS_VERSION=2
 ROS_PYTHON_VERSION=3
-ROS_DISTRO=foxy
+ROS_DISTRO=humble
 ```
 
 In order to install further ROS packages:
@@ -303,7 +305,7 @@ ros2 param list
 
 ## 5. Develeloping with ROS
 
-When working with ROS we use workspaces. A workspace is a directory containing ROS 2 packages. Before using ROS 2, it’s necessary to source your ROS 2 installation workspace in the terminal you plan to work in. This makes ROS 2’s packages available for you to use in that terminal.
+When working with ROS we use workspaces. A workspace is a directory containing the ROS 2 packages you will develop. Before using ROS 2, it’s necessary to source your ROS 2 installation workspace (with the binaries) in the terminal you plan to work in. This makes ROS 2’s installed packages available for you to use in that terminal.
 
 You also have the option of sourcing an “overlay” – a secondary workspace where you can add new packages without interfering with the existing ROS 2 workspace that you’re extending, or “underlay”. Your underlay must contain the dependencies of all the packages in your overlay. Packages in your overlay will override packages in the underlay. It’s also possible to have several layers of underlays and overlays, with each successive overlay using the packages of its parent underlays.
 
@@ -311,7 +313,7 @@ If a certain ROS software doesn't have a binary package or you want to use the s
 
 ### 5.1 Get the workspace ready:
 
-In ROS2 it is usually a common practice to use `colcon` as the tool to build your packages.
+In ROS2 it is usually a common practice to use `colcon` as the tool to help build your packages.
 It is an iteration on the ROS build tools `catkin_make`, `catkin_make_isolated`, `catkin_tools` and `ament_tools`.
 You can install it from the oficial usual Ubuntu repositories:
 ```
@@ -483,338 +485,3 @@ ros2 run py_pubsub talker
 * [index.ros.org](https://index.ros.org)
 * [answers.ros.org](https://answers.ros.org)
 * [discourse.ros.org](https://discourse.ros.org)
-
-## 7. Gazebo Overview
-
-You can find the this overview [here](https://docs.google.com/presentation/d/1MWuh-OQoFF2c5AxdfburZOnkCEHG8cknO582183rrLE/edit?usp=sharing) (slides 14-19).
-
-## 8. Quick Review of install steps
-
-You can find the Gazebo installation instructions [here](http://gazebosim.org/tutorials?tut=install_ubuntu).
-
-For the purpose of this workshop the latest version (gazebo 11) is recommended. For this you can just follow the one-liner default installation:
-```
-curl -sSL http://get.gazebosim.org | sh
-```
-
-## 9. Gazebo basics and GUI
-
-You can run gazebo by:
-```
-gazebo
-```
-
-Gazebo has a server and a client that can be run independently. You can try running the server with:
-```
-gzserver
-```
-And the client:
-```
-gzclient
-```
-At this point you should see the Gazebo user interface. You restart the gzclient application as often as you want, and even run multiple interfaces.
-
-### 9.1 Worlds
-
-The world description file contains all the elements in a simulation, including robots, lights, sensors, and static objects. This file is formatted using [SDF (Simulation Description Format)](http://gazebosim.org/sdf.html), and typically has a .world extension.
-
-There are several demo worlds installed at:
-```
-ls /usr/share/gazebo-11/worlds/
-```
-You can load them in gazebo like this:
-```
-gazebo worlds/shapes_layers.world
-```
-
-### 9.2 Models and Actors
-
-#### Models
-
-Gazebo is able to dynamically load models into simulation either programmatically or through the GUI. Models exist on your computer, after they have been downloaded or created by you. 
-
-You can find models at the [Gazebo Model database](https://github.com/osrf/gazebo_models) as well as on [ignition fuel](https://app.ignitionrobotics.org/fuel).
-
-The model database is a GitHub repository found [here](https://github.com/osrf/gazebo_models).
-
-More info on Gazebo's model directory structure, and the necessary files within a model directory can be found [here](http://gazebosim.org/tutorials?tut=model_structure).
-
-The SDF format can also be used to define models as described in [this tutorial](http://gazebosim.org/tutorials?tut=build_model).
-
-#### Actors
-
-In Gazebo, an animated model is called an actor. Actors extend common models, adding animation capabilities.
-There are two types of animations which can be used separately or combined together:
-
-* Skeleton animation, which is relative motion between links in one model.
-* Motion along a trajectory, which carries all of the actor's links around the world, as one group.
-* Both types of motions can be combined to achieve a skeleton animation which moves in the world.
-
-For example loads an box moving in a square trajectory again and again:
-```
-gazebo worlds/animated_box.world
-```
-The trajectory goes through four points in the world ([-1, -1, 1], [-1, 1, 1], [1, 1, 1] and [1, -1, 1]) and takes 1 s in between them.
-
-
-We can also create our own with `vim walk.world` and let's add:
-
-```
-<?xml version="1.0" ?>
-<sdf version="1.6">
-  <world name="default">
-    <include>
-      <uri>model://sun</uri>
-    </include>
-    <actor name="actor">
-      <skin>
-        <filename>walk.dae</filename>
-      </skin>
-    </actor>
-  </world>
-</sdf>
-```
-
-Now we can test it out:
-```
-gazebo walk.world
-```
-The actor in the example above is really simple, all it loads is a COLLADA file described within the <skin> tag.
-The animation tag goes alongside the skin tag, and it takes a name parameter.
-
-You can also try with the `moonwalk.dae` animation.
-
-For example, the files walk.dae and moonwalk.dae are compatible so they can be mixed with each other:
-
-```
-<?xml version="1.0" ?>
-<sdf version="1.6">
-  <world name="default">
-    <include>
-      <uri>model://sun</uri>
-    </include>
-    <actor name="actor">
-      <skin>
-        <filename>walk.dae</filename>
-      </skin>
-      <animation name="animation">
-        <filename>moonwalk.dae</filename>
-      </animation>
-    </actor>
-  </world>
-</sdf>
-```
-
-Now let's combine trajectories and static animations:
-
-```
-<sdf version="1.6">
-  <world name="default">
-    <include>
-      <uri>model://sun</uri>
-    </include>
-    <actor name="actor">
-      <skin>
-        <filename>walk.dae</filename>
-      </skin>
-      <animation name="animation">
-        <filename>walk.dae</filename>
-      </animation>
-      <script>
-        <trajectory id="0" type="walking">
-          <waypoint>
-            <time>0</time>
-            <pose>0 2 0 0 0 -1.57</pose>
-          </waypoint>
-          <waypoint>
-            <time>2</time>
-            <pose>0 -2 0 0 0 -1.57</pose>
-          </waypoint>
-          <waypoint>
-            <time>2.5</time>
-            <pose>0 -2 0 0 0 1.57</pose>
-          </waypoint>
-          <waypoint>
-            <time>7</time>
-            <pose>0 2 0 0 0 1.57</pose>
-          </waypoint>
-          <waypoint>
-            <time>7.5</time>
-            <pose>0 2 0 0 0 -1.57</pose>
-          </waypoint>
-        </trajectory>
-      </script>
-    </actor>
-  </world>
-</sdf>
-```
-
-The actor's leg are not moving because the animation name has to match the trajectory type:
-
-```
-     <animation name="walking">
-        <filename>walk.dae</filename>
-      </animation>
-```
-
-It's still not looking good, we need to synchronize the animation with the trajectory. 
-To do this e can enable that by setting <interpolate_x> to true inside <animation>:
-
-```
-     <animation name="walking">
-        <filename>walk.dae</filename>
-        <interpolate_x>true</interpolate_x>
-      </animation>
-```
-
-### 9.3 Connect from your source code
-
-Let's create our little listener project directory:
-```
-mkdir ~/listener/
-cd ~/listener
-```
-
-Now edit an empty `listener.cc` file and add:
-
-```
-#include <gazebo/transport/transport.hh>
-#include <gazebo/msgs/msgs.hh>
-#include <gazebo/gazebo_client.hh>
-
-#include <iostream>
-
-/////////////////////////////////////////////////
-// Function is called everytime a message is received.
-void cb(ConstWorldStatisticsPtr &_msg)
-{
-  // Dump the message contents to stdout.
-  std::cout << _msg->DebugString();
-}
-
-/////////////////////////////////////////////////
-int main(int _argc, char **_argv)
-{
-  // Load gazebo and run the transport system
-  gazebo::client::setup(_argc, _argv);
-
-  // Create our node for communication
-  gazebo::transport::NodePtr node(new gazebo::transport::Node());
-  node->Init();
-
-  // Listen to Gazebo world_stats topic
-  gazebo::transport::SubscriberPtr sub = node->Subscribe("~/world_stats", cb);
-
-  // Busy wait loop...replace with your own code as needed.
-  while (true)
-    gazebo::common::Time::MSleep(10);
-
-  // Make sure to shut everything down.
-  gazebo::client::shutdown();
-}
-```
-
-We edit `CMakeLists.txt` file and add this:
-
-```
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
-
-find_package(gazebo REQUIRED)
-
-include_directories(${GAZEBO_INCLUDE_DIRS})
-link_directories(${GAZEBO_LIBRARY_DIRS})
-list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
-
-add_executable(listener listener.cc)
-target_link_libraries(listener ${GAZEBO_LIBRARIES} pthread)
-```
-Then just build like you will do with any `cmake` based project:
-
-```
-mkdir build
-cd build
-cmake ..
-make
-```
-
-You can go ahead and execute the resulting binary to checkout the results:
-
-```
-./listener
-```
-
-### 9.4 Plugins
-
-Plugins provide a simple and convenient mechanism to interface with Gazebo. Plugins can either be loaded on the command line, or specified in an SDF file (see the SDF format).
-
-There are currently 6 types of plugins
-
-1. World
-2. Model
-3. Sensor
-4. System
-5. Visual
-6. GUI
-
-For more depth on this you can check the [Gazebo plugins tutorial](http://gazebosim.org/tutorials/?tut=plugins_hello_world).
-
-Now we can check how a plugin is loaded. You might need to install the ros-gazebo plugins:
-```
-sudo apt-get install ros-foxy-gazebo-plugins
-```
-
-You can find the plugin load instruction on the SDF world file:
-```
-vim /opt/ros/foxy/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world
-```
-
-Let's run the ros differential drive demo:
-```
-gazebo --verbose /opt/ros/foxy/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world
-```
-
-## 10. ROS and Gazebo
-
-You can publish to the `/demo/cmd_demo` topic to start moving the differential model:
-```
-ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{linear: {x: 1.0}}' -1
-```
-Also rotating it:
-```
-ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{angular: {z: 0.1}}' -1
-```
-You can inspect the topics from the ROS CLI:
-```
-ros2 topic echo /demo/odom_demo
-```
-Or inspect the tf:
-```
-ros2 run tf2_ros tf2_echo odom_demo chassis
-```
-`tf` is the ROS transform library, which lets the user keep track of multiple coordinate frames over time.
-
-You can do this fir the right wheel:
-```
-ros2 run tf2_ros tf2_echo chassis right_wheel
-```
-Or the left wheel:
-```
-ros2 run tf2_ros tf2_echo chassis left_wheel
-```
-
-## 11. Gazebo resources and community
-
-* [gazebosim.org](http://gazebosim.org/)
-* [ignitionrobotics.org](https://ignitionrobotics.org/)
-* [answers.gazebosim.org](https://answers.gazebosim.org)
-* [community.gazebosim.org](https://community.gazebosim.org/)
-
-## 12. How to join the community and contribute
-
-A summary of ROS and Gazebo resources and community links can be found on the [slides](https://docs.google.com/presentation/d/1MWuh-OQoFF2c5AxdfburZOnkCEHG8cknO582183rrLE/edit?usp=sharing) (21-23).
-
-### ROS contributions:
-* https://index.ros.org/doc/ros2/Contributing/
-
-### Gazebo Contributions:
-* http://gazebosim.org/tutorials?tut=contrib_code&cat=development
